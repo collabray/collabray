@@ -1,9 +1,12 @@
-<h1 align="center">Benson Ray</h1>
-<p align="center">
-  Software Engineer &nbsp;·&nbsp; MLOps &nbsp;·&nbsp; Backend Systems &nbsp;·&nbsp; Cybersecurity
-  <br/>
-  Nairobi, Kenya &nbsp;·&nbsp; Available remotely worldwide
-</p>
+<div align="center">
+
+<a href="https://github.com/collabray">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&pause=1000&color=58A6FF&center=true&vCenter=true&width=750&lines=Benson+Ray+%7C+Software+Engineer;MLOps+%7C+Backend+Systems+%7C+Cybersecurity;Distributed+Systems+%7C+Production+Infrastructure" alt="Typing SVG"/>
+</a>
+
+</div>
+
+<p align="center">Nairobi, Kenya &nbsp;|&nbsp; Available remotely worldwide</p>
 
 <p align="center">
   <a href="https://linkedin.com/in/benson-ray"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"/></a>
@@ -30,15 +33,15 @@ My focus is the operational reality of software: how systems behave under failur
 
 ## Technical Stack
 
-**Languages** &nbsp; Python · TypeScript · JavaScript · Rust · C · SQL · Bash
+**Languages** &nbsp; Python | TypeScript | JavaScript | Rust | C | SQL | Bash
 
-**Backend & Data** &nbsp; FastAPI · Node.js · Apache Kafka · PostgreSQL · Redis
+**Backend & Data** &nbsp; FastAPI | Node.js | Apache Kafka | PostgreSQL | Redis
 
-**Infrastructure** &nbsp; Docker · Kubernetes · Linux · Prometheus · Grafana · OpenTelemetry
+**Infrastructure** &nbsp; Docker | Kubernetes | Linux | Prometheus | Grafana | OpenTelemetry
 
-**MLOps** &nbsp; MLflow · Apache Airflow · NumPy · SciPy
+**MLOps** &nbsp; MLflow | Apache Airflow | NumPy | SciPy
 
-**Security** &nbsp; Kali Linux · Wireshark · OWASP practices · JWT / RBAC · TLS
+**Security** &nbsp; Kali Linux | Wireshark | OWASP practices | JWT / RBAC | TLS
 
 ## Top Repositories
 
