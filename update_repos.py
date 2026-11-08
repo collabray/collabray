@@ -3,11 +3,12 @@
 
 Fetches the owner's public repositories from the GitHub API, ranks them by
 stars (ties broken by forks, then most recent push), and rewrites the block
-between the REPOS:START / REPOS:END markers in README.md.
+between the REPOS:START / REPOS:END markers in README.md. If a repository has
+no description, the first prose sentence of its README is used instead.
 
 Environment variables:
   GITHUB_USER   GitHub username              (default: collabray)
-  GITHUB_TOKEN  Token for higher rate limits (optional, provided in Actions)
+  GITHUB_TOKEN  Token for higher rate limits (provided automatically in Actions)
   TOP_N         Number of repos to show      (default: 6)
   MIN_STARS     Minimum stars to qualify     (default: 0)
   README_PATH   Path to the README           (default: README.md)
@@ -26,22 +27,44 @@ README = os.environ.get("README_PATH", "README.md")
 START, END = "<!-- REPOS:START -->", "<!-- REPOS:END -->"
 
 
+def api(url, accept="application/vnd.github+json"):
+    headers = {"Accept": accept, "User-Agent": "profile-readme-updater"}
+    if TOKEN:
+        headers["Authorization"] = f"Bearer {TOKEN}"
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        return resp.read().decode("utf-8", "replace")
+
+
 def fetch_repos():
     repos, page = [], 1
     while True:
-        url = (f"https://api.github.com/users/{USER}/repos"
-               f"?type=owner&per_page=100&page={page}")
-        req = urllib.request.Request(url, headers={
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "profile-readme-updater",
-            **({"Authorization": f"Bearer {TOKEN}"} if TOKEN else {}),
-        })
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            batch = json.load(resp)
+        batch = json.loads(api(
+            f"https://api.github.com/users/{USER}/repos"
+            f"?type=owner&per_page=100&page={page}"))
         if not batch:
             return repos
         repos.extend(batch)
         page += 1
+
+
+def readme_summary(full_name, limit=160):
+    """First prose paragraph of a repo's README, used when no description is set."""
+    try:
+        text = api(f"https://api.github.com/repos/{full_name}/readme",
+                   accept="application/vnd.github.raw")
+    except Exception:
+        return ""
+    for block in re.split(r"\n\s*\n", text):
+        line = " ".join(block.split())
+        if not line or line[0] in "#<![>|-*`=":
+            continue
+        line = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", line)  # strip links
+        line = re.sub(r"[*_`]", "", line)
+        if len(line) < 20:
+            continue
+        return line if len(line) <= limit else line[:limit].rsplit(" ", 1)[0] + "..."
+    return ""
 
 
 def select(repos):
@@ -49,11 +72,12 @@ def select(repos):
         r for r in repos
         if not r["fork"]
         and not r["archived"]
-        and r["name"].lower() != USER.lower()      # skip the profile repo
+        and r["name"].lower() != USER.lower()  # skip the profile repo itself
         and r["stargazers_count"] >= MIN_STARS
     ]
-    eligible.sort(key=lambda r: (r["stargazers_count"], r["forks_count"], r["pushed_at"]),
-                  reverse=True)
+    eligible.sort(
+        key=lambda r: (r["stargazers_count"], r["forks_count"], r["pushed_at"]),
+        reverse=True)
     return eligible[:TOP_N]
 
 
@@ -67,13 +91,12 @@ def render(repos):
     lines = ["| Repository | Description | Language | Stars | Forks |",
              "|---|---|---|---:|---:|"]
     for r in repos:
+        desc = esc(r["description"] or readme_summary(r["full_name"])) \
+            or "No description provided"
         lines.append(
-            f"| [{r['name']}]({r['html_url']}) "
-            f"| {esc(r['description']) or '—'} "
-            f"| {r['language'] or '—'} "
-            f"| {r['stargazers_count']} "
-            f"| {r['forks_count']} |"
-        )
+            f"| [{r['name']}]({r['html_url']}) | {desc} "
+            f"| {r['language'] or 'N/A'} "
+            f"| {r['stargazers_count']} | {r['forks_count']} |")
     return "\n".join(lines)
 
 
