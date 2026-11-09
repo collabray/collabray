@@ -50,12 +50,12 @@ My focus is the operational reality of software: how systems behave under failur
 
 | Repository | Description | Language | Stars | Forks |
 |---|---|---|---:|---:|
-| [wisense](https://github.com/collabray/wisense) | WiFi CSI human sensing for Python presence, fall detection, breathing rate, activity classification, and occupancy counting from an ESP32. No camera, no cloud, no PyTorch/CUDA at runtime. | Python | 28 | 4 |
-| [farhat](https://github.com/collabray/farhat) | — | C# | 1 | 0 |
+| [wisense](https://github.com/collabray/wisense) | WiFi CSI human sensing for Python presence, fall detection, breathing rate, activity classification, and occupancy counting from an ESP32. No camera, no cloud, no PyTorch/CUDA at runtime. | Python | 29 | 4 |
+| [farhat](https://github.com/collabray/farhat) | A skill that lets a coding agent build a Unity game | C# | 1 | 0 |
 | [busbooking](https://github.com/collabray/busbooking) | Production-Grade Intercity Bus Booking Aggregator. | TypeScript | 1 | 0 |
+| [pool-automation](https://github.com/collabray/pool-automation) | Open-source payment automation system for coin-operated pool, snooker, foosball, and air hockey tables with M-Pesa payments, cash POS, admin dashboard, owner app, and secure ESP32 vending control. | TypeScript | 1 | 0 |
 | [phone_farm](https://github.com/collabray/phone_farm) | — | Python | 1 | 0 |
 | [drift-detector](https://github.com/collabray/drift-detector) | — | Python | 1 | 0 |
-| [pos](https://github.com/collabray/pos) | A production-grade, multi-tenant Point of Sale platform built for retail, restaurant, and pharmacy operations. Combines a native C++20 desktop client with cloud sync, a React management dashboard, and a Python AI analytics worker designed to operate fully offline and sync seamlessly when connectivity is restored. | JavaScript | 1 | 0 |
 
 <!-- REPOS:END -->
 
