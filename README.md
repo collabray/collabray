@@ -55,7 +55,7 @@ My focus is the operational reality of software: how systems behave under failur
 | [pulsepin](https://github.com/collabray/pulsepin) | — | Python | 2 | 0 |
 | [pos](https://github.com/collabray/pos) | A production-grade, multi-tenant Point of Sale platform built for retail, restaurant, and pharmacy operations. Combines a native C++20 desktop client with cloud sync, a React management dashboard, and a Python AI analytics worker designed to operate fully offline and sync seamlessly when connectivity is restored. | JavaScript | 2 | 0 |
 | [phone_farm](https://github.com/collabray/phone_farm) | — | Python | 2 | 0 |
-| [devrig](https://github.com/collabray/devrig) | — | Python | 1 | 1 |
+| [ray-agent](https://github.com/collabray/ray-agent) | — | Python | 1 | 0 |
 
 <!-- REPOS:END -->
 
